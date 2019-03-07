@@ -23,7 +23,9 @@ df = pd.read_csv("training_titanic.csv")   #read the csv file we can read any ur
 
 #df_per = df["Survived"][(df["Sex"] == "female") & (df["Survived"] == 0)].value_counts()
 
+df_row = df.loc[2:4,["Survived"]]
 
+df_row = df.loc[2:4,["Survived",'Sex']]
 #Number of people whomis died and live
 df_count = df["Survived"].value_counts()    #count number of people died and survived                                                            
 
