@@ -20,11 +20,25 @@ df_ref = dict(zip([i for i in range(0,65)],df.columns))   #reference of labeling
 
 df_pattern = df.groupby([60,63])[2]  #eating pattern
 
+#version 1
 df_income_hom = df[63][df[8] =="Homemade"].value_counts()   #comparison of income
 
 df_income_hom_new = df[63][df[8] =="Canned"].value_counts()   #comparison of income
 
-df_avg = df[8].value_counts().mean()   #Each type of source
+df_new = pd.DataFrame()
+
+#version 2
+frames = [df_new,df_income_hom,df_income_hom_new]
+
+df_concat = pd.concat(frames,axis = 1)
+
+#version 3
+df_append = df_new.append(df_income_hom)
+
+df_compare = df_concat.append(df_income_hom_new)
+
+#Each type of source
+df_avg = df[8].value_counts().mean()   
 
 #df_comp = df[60][(df[2]=="Turkey") & (df[60] == "Suburban")].count() #eating SuburBan area
 
@@ -38,9 +52,15 @@ df_grpw = df.groupby([63])[df[8]=="Homemade"].count()  #Homemade  income
 
 df_pattern_veri = df[63][(df[2]=="Turducken") & (df[8]=="Homemade")].value_counts()  #income who eat turuducken and homemade sauce
 
+#version 1
 df_carn = df[63][(df[8] == "Canned")].value_counts() #income who eat Canned
 
 df_roast = df[63][(df[4] == "Roasted")].value_counts()  #income who eat roasted
+
+#version 2
+df_second = pd.DataFrame()
+frame = [df_second,df_carn,df_roast]
+df_dish = pd.concat(frame,axis = 1)
 
 df_count = df.groupby([60]).count()    #number of people eat different kind of dishes
 
